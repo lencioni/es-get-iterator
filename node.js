@@ -9,4 +9,10 @@ module.exports = function getIterator(iterable) {
 	if (iterable != null && typeof iterable[$iterator] !== 'undefined') {
 		return iterable[$iterator]();
 	}
+	if (!arguments[$iterator]) {
+		var isArgs = require('is-arguments');
+		if (isArgs(iterable)) {
+			return Array.prototype[$iterator].call(iterable);
+		}
+	}
 };
